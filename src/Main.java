@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         HashMap<String, ArrayList<Country>> countryMap = new HashMap<String, ArrayList<Country>>();
         File f = new File("Countries/src/countries.txt");
         //There is an issue with my file path.I cant get the program to recognize my file without using the full path.
@@ -20,12 +20,21 @@ public class Main {
 
     }
 
-    public static String userInput(){
+    public static String userInput() throws Exception {
         System.out.println("Pick a lowercase letter to receive a list of countries that begin with that letter:\n");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
 
-        System.out.println("Printing a list of countries starting with the letter " + userInput);
+
+        try {
+            if (userInput == "") {
+                throw new Exception("You must type a letter");
+            } else
+                System.out.println("Printing a list of countries starting with the letter " + userInput);
+        } catch (Exception e) {
+            System.out.println("Caught: " + e.getMessage());
+        }
+
         return userInput;
 
     }
